@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PlanDiagram version="1.1" name="Plan Diagram" embedded="false">
+	<Goal name="ExploreEnvironment"/>
+	<StartState id="285fd980-3524-47c4-9609-46b163e8368b" name="StartState0" x="55" y="340" width="-1" height="-1">
+		<transition guard="">
+			<child>aca2bbb3-bb35-4996-8bc7-7a1ee46c8a99</child>
+		</transition>
+	</StartState>
+	<EndState id="bfef9dea-f759-4205-8e5b-33983240214a" name="EndState0" x="624" y="220" width="-1" height="-1">
+	</EndState>
+	<InternalState id="43df9a5c-7b84-40de-80dd-3bb9b5f492fb" name="Evaluate Environment" x="750" y="137" width="-1" height="-1">
+		<Action name="getInterestingLocations" result="interestingLocations">
+			<parameter name="Parameter0" type="Type"/>
+		</Action>
+		<transition guard="">
+			<child>0543edc9-b924-471a-b2bc-8a3c8d213bcc</child>
+			<Message name="send" agents="Broker">
+				<Performative name="sendInterestingLocations">
+					<parameter name="interestingLocations" type="Type"/>
+				</Performative>
+			</Message>
+		</transition>
+	</InternalState>
+	<InternalState id="faf78d06-9aa3-48c8-9461-38947094a2e1" name="Move" x="507" y="405" width="-1" height="-1">
+		<Action name="moveTo" result="pos">
+			<parameter name="nextLocation" type="Location"/>
+		</Action>
+		<transition guard="pos">
+			<child>aca2bbb3-bb35-4996-8bc7-7a1ee46c8a99</child>
+		</transition>
+	</InternalState>
+	<InternalState id="aca2bbb3-bb35-4996-8bc7-7a1ee46c8a99" name="Map Local Environment" x="202" y="311" width="-1" height="-1">
+		<Action name="mapLocalEnvironment" result="localMap">
+			<parameter name="pos" type="Location"/>
+		</Action>
+		<transition guard="">
+			<child>bff8614b-31db-4032-b527-e2cf1b3a2379</child>
+			<Message name="send" agents="Mapper">
+				<Performative name="sendLocalMap">
+					<parameter name="localMap" type="Map"/>
+				</Performative>
+			</Message>
+		</transition>
+	</InternalState>
+	<InternalState id="0543edc9-b924-471a-b2bc-8a3c8d213bcc" name="Wait" x="1005" y="316" width="-1" height="-1">
+		<transition guard="">
+			<child>faf78d06-9aa3-48c8-9461-38947094a2e1</child>
+			<Message name="recv" agents="Borker">
+				<Performative name="receiveTargetLocation">
+					<parameter name="nextLocation" type="Location"/>
+				</Performative>
+			</Message>
+		</transition>
+	</InternalState>
+	<InternalState id="bff8614b-31db-4032-b527-e2cf1b3a2379" name="Wait" x="308" y="139" width="-1" height="-1">
+		<transition guard="">
+			<child>d3a270a7-9deb-4e99-b59d-25f95147ac44</child>
+			<Message name="recv" agents="Mapper">
+				<Performative name="receiveGlobalMap">
+					<parameter name="globalMap" type="Map"/>
+				</Performative>
+			</Message>
+		</transition>
+	</InternalState>
+	<InternalState id="d3a270a7-9deb-4e99-b59d-25f95147ac44" name="Check Mapping Done" x="502" y="14" width="246" height="68">
+		<Action name="checkGlobalMap" result="mappingDone">
+			<parameter name="globalMap" type="Map"/>
+		</Action>
+		<transition guard="not mappingDone">
+			<child>43df9a5c-7b84-40de-80dd-3bb9b5f492fb</child>
+		</transition>
+		<transition guard="mappingDone">
+			<child>bfef9dea-f759-4205-8e5b-33983240214a</child>
+		</transition>
+	</InternalState>
+</PlanDiagram>

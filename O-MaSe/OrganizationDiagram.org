@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OrgDiagram version="1.1" name="Organization Diagram" embedded="true">
+	<Organization id="69d499c4-ab45-42fe-8377-ae1225700212" name="Multi Agent Mapping Team" x="340" y="286" width="-1" height="-1">
+		<achieves>
+			<child>ff4a75a4-5652-427a-8416-a6f01c38ac3e</child>
+		</achieves>
+		<protocol name="map">
+			<child>0e478540-6999-4e36-a390-c072f070a5b8</child>
+		</protocol>
+	</Organization>
+	<Goal id="ff4a75a4-5652-427a-8416-a6f01c38ac3e" name="Map the environment" number="0" preference="1.0" x="382" y="377" width="-1" height="-1" definition="" description="" color="No">
+	</Goal>
+	<Actor id="0e478540-6999-4e36-a390-c072f070a5b8" name="Environment" x="385" y="111" width="-1" height="-1">
+	</Actor>
+</OrgDiagram>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RoleDiagram version="1.1" name="Role Diagram" embedded="true">
+	<Capability id="c6ae8264-f1d5-4bdc-af90-ee3d268c1fb8" name="Communication" x="11" y="285" width="-1" height="-1">
+	</Capability>
+	<Capability id="90086548-4fc5-48e2-b6a2-fc42a4fcf4a5" name="Map Merging" x="140" y="285" width="-1" height="-1">
+	</Capability>
+	<Capability id="8eab22fd-7ec9-4b85-aeb5-7066b5c7cd31" name="Communication" x="274" y="286" width="-1" height="-1">
+	</Capability>
+	<Capability id="40ce7a5b-18d0-4375-bebb-223f716dfb25" name="Location Analysis" x="404" y="285" width="-1" height="-1">
+	</Capability>
+	<Capability id="6515c833-1f58-4ffe-b25c-7b6afe44392f" name="Communication" x="144" y="541" width="-1" height="-1">
+	</Capability>
+	<Capability id="49f54ea5-f92a-4c22-887c-ff6591ec19eb" name="GPS" x="252" y="541" width="-1" height="-1">
+	</Capability>
+	<Capability id="9631494a-937d-4df1-b504-47578835be21" name="Movement" x="345" y="541" width="-1" height="-1">
+	</Capability>
+	<Capability id="b9cc9cc0-7114-4daf-8aed-5c37545e2bd9" name="Sonar" x="437" y="541" width="-1" height="-1">
+	</Capability>
+	<Goal id="aa9c1b86-6137-4ade-8319-06c8df8bbcda" name="Map the Environment" number="0" preference="1.0" x="47" y="72" width="-1" height="-1" definition="" description="" color="No">
+	</Goal>
+	<Goal id="c7140bc9-1ee3-45d6-bcc7-e26d6d916649" name="Achieve Best Exploration Possible" number="1" preference="1.0" x="287" y="70" width="-1" height="-1" definition="" description="" color="No">
+	</Goal>
+	<Goal id="e550d360-69fa-4a17-9071-54b0337061d0" name="Explore Environment" number="2" preference="1.0" x="273" y="348" width="-1" height="-1" definition="" description="" color="No">
+	</Goal>
+	<Role id="c5b4bbe9-1030-47f4-8d68-1da49b75ec0c" name="Mapper" x="115" y="192" width="-1" height="-1">
+		<achieves>
+			<child>aa9c1b86-6137-4ade-8319-06c8df8bbcda</child>
+		</achieves>
+		<requires>
+			<child>c6ae8264-f1d5-4bdc-af90-ee3d268c1fb8</child>
+		</requires>
+		<requires>
+			<child>90086548-4fc5-48e2-b6a2-fc42a4fcf4a5</child>
+		</requires>
+	</Role>
+	<Role id="557c4b00-d885-4487-9090-61c7f864ec68" name="Broker" x="378" y="191" width="-1" height="-1">
+		<achieves>
+			<child>c7140bc9-1ee3-45d6-bcc7-e26d6d916649</child>
+		</achieves>
+		<requires>
+			<child>8eab22fd-7ec9-4b85-aeb5-7066b5c7cd31</child>
+		</requires>
+		<requires>
+			<child>40ce7a5b-18d0-4375-bebb-223f716dfb25</child>
+		</requires>
+	</Role>
+	<Role id="4cf8f67e-58b5-4e44-b88e-caff291935f5" name="Explorer" x="261" y="378" width="-1" height="-1">
+		<achieves>
+			<child>e550d360-69fa-4a17-9071-54b0337061d0</child>
+		</achieves>
+		<requires>
+			<child>6515c833-1f58-4ffe-b25c-7b6afe44392f</child>
+		</requires>
+		<requires>
+			<child>49f54ea5-f92a-4c22-887c-ff6591ec19eb</child>
+		</requires>
+		<requires>
+			<child>9631494a-937d-4df1-b504-47578835be21</child>
+		</requires>
+		<requires>
+			<child>b9cc9cc0-7114-4daf-8aed-5c37545e2bd9</child>
+		</requires>
+		<requires>
+			<child>21b1fc93-cbbd-4674-8f3d-d5b55875379b</child>
+		</requires>
+	</Role>
+	<Capability id="21b1fc93-cbbd-4674-8f3d-d5b55875379b" name="Curiosity" x="524" y="540" width="-1" height="-1">
+	</Capability>
+</RoleDiagram>

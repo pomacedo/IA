@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GoalDiagram version="1.1" name="Explore Environment Goal" embedded="false">
+	<Goal id="8409e891-fadd-4907-8073-eddfb36814d4" name="Explore the Environment" number="0" preference="1.0" x="351" y="36" width="-1" height="-1" definition="" description="" color="No">
+		<and>
+			<child>29d57eb4-b001-442e-bbb6-19aa4d4102e0</child>
+		</and>
+		<and>
+			<child>58c81e7c-d012-4237-b1e2-b0aea4775b7a</child>
+		</and>
+	</Goal>
+	<Goal id="29d57eb4-b001-442e-bbb6-19aa4d4102e0" name="Satisfy Curiosity" number="1" preference="1.0" x="112" y="148" width="-1" height="-1" definition="" description="" color="No">
+		<and>
+			<child>586a69f5-ec4a-4aec-8bfd-db90eaedf92b</child>
+		</and>
+	</Goal>
+	<Goal id="58c81e7c-d012-4237-b1e2-b0aea4775b7a" name="Work as part of the Team of Agents" number="2" preference="1.0" x="538" y="136" width="-1" height="-1" definition="" description="" color="No">
+		<and>
+			<child>b09182ef-2f16-4c9c-a478-068ca6a056ee</child>
+		</and>
+		<and>
+			<child>5a85f494-87a1-48b6-af36-e148df5527c4</child>
+		</and>
+	</Goal>
+	<Goal id="b09182ef-2f16-4c9c-a478-068ca6a056ee" name="Communicate with the Master Agent" number="2.1" preference="1.0" x="328" y="250" width="-1" height="-1" definition="" description="" color="No">
+		<and>
+			<child>4d850f4b-9b45-40c0-a675-db1ded001c66</child>
+		</and>
+	</Goal>
+	<Goal id="5a85f494-87a1-48b6-af36-e148df5527c4" name="Communicate with the Broker Agent" number="2.2" preference="1.0" x="637" y="256" width="-1" height="-1" definition="" description="" color="No">
+		<and>
+			<child>422a9305-2b4b-4768-b8e7-32ab2fe7ef00</child>
+		</and>
+		<and>
+			<child>80e529eb-1cce-4db5-9f51-973a37defe2a</child>
+		</and>
+	</Goal>
+	<Goal id="4d850f4b-9b45-40c0-a675-db1ded001c66" name="Send local environment data" number="2.1.1" preference="1.0" x="215" y="336" width="-1" height="-1" definition="" description="" color="No">
+		<parameter name="local map" type="Map"/>
+	</Goal>
+	<Goal id="422a9305-2b4b-4768-b8e7-32ab2fe7ef00" name="Send Interesting Locations" number="2.2.1" preference="1.0" x="358" y="441" width="-1" height="-1" definition="" description="" color="No">
+		<parameter name="locs" type="Location-List"/>
+		<precedes>
+			<child>80e529eb-1cce-4db5-9f51-973a37defe2a</child>
+		</precedes>
+	</Goal>
+	<Goal id="80e529eb-1cce-4db5-9f51-973a37defe2a" name="Move to the location the Broker chose" number="2.2.2" preference="1.0" x="666" y="439" width="-1" height="-1" definition="" description="" color="No">
+		<parameter name="loc" type="Location"/>
+	</Goal>
+	<Goal id="586a69f5-ec4a-4aec-8bfd-db90eaedf92b" name="Identify interesting locations" number="1.1" preference="1.0" x="12" y="455" width="-1" height="-1" definition="" description="Identify the visible interesting locations that should be explored next" color="No">
+		<precedes>
+			<child>422a9305-2b4b-4768-b8e7-32ab2fe7ef00</child>
+		</precedes>
+	</Goal>
+</GoalDiagram>

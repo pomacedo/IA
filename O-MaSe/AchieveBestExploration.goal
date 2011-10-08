@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GoalDiagram version="1.1" name="Achieve Best Exploration Goal" embedded="false">
+	<Goal id="7586d6d9-8a12-47b2-8648-ed023c68ba33" name="Achieve Best Exploration Possible" number="0" preference="1.0" x="293" y="100" width="-1" height="-1" definition="" description="" color="No">
+		<and>
+			<child>6d6e72e6-8683-43ad-bd31-b2c970b5457b</child>
+		</and>
+		<and>
+			<child>6c8a1c14-a5af-4a59-961b-4f26b681ec26</child>
+		</and>
+		<and>
+			<child>e0c09f58-43f5-416e-b53a-ed165f87909e</child>
+		</and>
+	</Goal>
+	<Goal id="6d6e72e6-8683-43ad-bd31-b2c970b5457b" name="Aggregate interesting Locations" number="1" preference="1.0" x="69" y="262" width="-1" height="-1" definition="" description="" color="No">
+		<parameter name="loc" type="Location"/>
+		<parameter name="agent" type="Agent"/>
+		<precedes>
+			<child>6c8a1c14-a5af-4a59-961b-4f26b681ec26</child>
+		</precedes>
+	</Goal>
+	<Goal id="6c8a1c14-a5af-4a59-961b-4f26b681ec26" name="Negotiate" number="2" preference="1.0" x="381" y="269" width="-1" height="-1" definition="" description="" color="No">
+		<parameter name="locs" type="Location-List"/>
+		<precedes>
+			<child>e0c09f58-43f5-416e-b53a-ed165f87909e</child>
+		</precedes>
+		<and>
+			<child>1de9055b-a33b-4f01-962d-35b4c7f5ed25</child>
+		</and>
+		<and>
+			<child>90d7850e-b808-45a5-8485-ee67db41d923</child>
+		</and>
+	</Goal>
+	<Goal id="e0c09f58-43f5-416e-b53a-ed165f87909e" name="Send back the target locations" number="3" preference="1.0" x="619" y="261" width="-1" height="-1" definition="" description="" color="No">
+		<parameter name="locs" type="Location-List"/>
+		<parameter name="agents" type="Agent-List"/>
+	</Goal>
+	<Goal id="1de9055b-a33b-4f01-962d-35b4c7f5ed25" name="Analyze relative positioning of the Locations" number="2.1" preference="1.0" x="162" y="446" width="-1" height="-1" definition="" description="" color="No">
+		<parameter name="locs" type="Location-List"/>
+		<precedes>
+			<child>90d7850e-b808-45a5-8485-ee67db41d923</child>
+		</precedes>
+	</Goal>
+	<Goal id="90d7850e-b808-45a5-8485-ee67db41d923" name="Choose where each Agent should go next" number="2.2" preference="1.0" x="550" y="439" width="-1" height="-1" definition="" description="" color="No">
+		<parameter name="locs" type="Location-List"/>
+		<parameter name="agents" type="Agent-List"/>
+	</Goal>
+</GoalDiagram>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GoalDiagram version="1.1" name="Map Environment Goal" embedded="false">
+	<Goal id="eee231a8-ff12-47d0-bac5-db18aeba441a" name="Map the Environment" number="0" preference="1.0" x="306" y="121" width="-1" height="-1" definition="" description="" color="No">
+		<and>
+			<child>b79f7397-f0a0-4820-824c-241631c8fddd</child>
+		</and>
+	</Goal>
+	<Goal id="b79f7397-f0a0-4820-824c-241631c8fddd" name="Coordinate Mapping" number="1" preference="1.0" x="210" y="244" width="-1" height="-1" definition="" description="" color="No">
+		<and>
+			<child>aaaa6393-1d47-41d2-ba40-a0f5a0170eae</child>
+		</and>
+		<and>
+			<child>5373a257-b661-4016-b2c7-d9c3f96ba2d7</child>
+		</and>
+	</Goal>
+	<Goal id="aaaa6393-1d47-41d2-ba40-a0f5a0170eae" name="Aggregate data from the team" number="1.1" preference="1.0" x="46" y="390" width="-1" height="-1" definition="" description="" color="No">
+		<parameter name="local map" type="Map"/>
+		<precedes>
+			<child>5373a257-b661-4016-b2c7-d9c3f96ba2d7</child>
+		</precedes>
+	</Goal>
+	<Goal id="5373a257-b661-4016-b2c7-d9c3f96ba2d7" name="Send back the updated global Map" number="1.2" preference="1.0" x="342" y="391" width="-1" height="-1" definition="" description="" color="No">
+		<parameter name="global map" type="Map"/>
+	</Goal>
+</GoalDiagram>

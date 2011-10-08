@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AgentDiagram version="1.1" name="Agent Diagram" embedded="true">
+	<Actor id="84ca6136-073e-421d-99ed-11e950204135" name="Environment" x="803" y="371" width="-1" height="-1">
+	</Actor>
+	<Agent id="29be085d-db1f-47e9-97ee-5c4db6153178" name="Mapper Agent" x="322" y="130" width="-1" height="-1">
+		<plays>
+			<child>c4a303ad-44a4-4d4a-b83e-edb4e75e6c62</child>
+		</plays>
+		<possesses>
+			<child>fd7437a6-abed-4fd6-95ba-4fd3c995f613</child>
+		</possesses>
+		<possesses>
+			<child>b73810ab-724e-437c-b41e-9e4dff58ed61</child>
+		</possesses>
+		<protocol name="sendGlobalMap">
+			<child>cbb45691-2da1-4a3c-a9a8-be095222b383</child>
+		</protocol>
+	</Agent>
+	<Agent id="2b2f11ac-8c0a-48d9-ade8-7a9a9b2e7149" name="Broker Agent" x="128" y="378" width="-1" height="-1">
+		<plays>
+			<child>fd25a5cf-c816-465b-b5c2-ceafa2614f9c</child>
+		</plays>
+		<possesses>
+			<child>f711b9bb-2674-4343-a228-5aa1a15a92aa</child>
+		</possesses>
+		<possesses>
+			<child>45e0e766-891c-497e-9c49-939e2b765a46</child>
+		</possesses>
+		<protocol name="sendTargetLocation">
+			<child>cbb45691-2da1-4a3c-a9a8-be095222b383</child>
+			<bendpoint x="418" y="452"/>
+		</protocol>
+	</Agent>
+	<Agent id="cbb45691-2da1-4a3c-a9a8-be095222b383" name="Explorer Agent" x="538" y="335" width="-1" height="-1">
+		<plays>
+			<child>160e82c2-c77b-44d8-94d7-a9057a3f9117</child>
+		</plays>
+		<possesses>
+			<child>4cf3cde1-9b47-4dc9-83a2-fc44efa3f3d7</child>
+		</possesses>
+		<possesses>
+			<child>b5a936d9-9f1a-49f6-add4-7ddc8b21860d</child>
+		</possesses>
+		<possesses>
+			<child>7d03be79-68e8-4259-b218-0b0719201ccf</child>
+		</possesses>
+		<possesses>
+			<child>4691af21-6a82-4603-b446-12ee813da727</child>
+		</possesses>
+		<possesses>
+			<child>08cd09f6-2235-47e5-8f2b-fd01a9ab3d5e</child>
+		</possesses>
+		<protocol name="sendLocalMap">
+			<child>29be085d-db1f-47e9-97ee-5c4db6153178</child>
+			<bendpoint x="603" y="194"/>
+		</protocol>
+		<protocol name="sendInterestingLocations">
+			<child>2b2f11ac-8c0a-48d9-ade8-7a9a9b2e7149</child>
+			<bendpoint x="413" y="373"/>
+		</protocol>
+		<protocol name="explore">
+			<child>84ca6136-073e-421d-99ed-11e950204135</child>
+		</protocol>
+	</Agent>
+	<Capability id="fd7437a6-abed-4fd6-95ba-4fd3c995f613" name="Communication" x="17" y="303" width="-1" height="-1">
+	</Capability>
+	<Capability id="b73810ab-724e-437c-b41e-9e4dff58ed61" name="Map Merging" x="151" y="302" width="-1" height="-1">
+	</Capability>
+	<Capability id="f711b9bb-2674-4343-a228-5aa1a15a92aa" name="Communication" x="280" y="302" width="-1" height="-1">
+	</Capability>
+	<Capability id="45e0e766-891c-497e-9c49-939e2b765a46" name="Location Analysis" x="412" y="302" width="-1" height="-1">
+	</Capability>
+	<Capability id="4cf3cde1-9b47-4dc9-83a2-fc44efa3f3d7" name="Communication" x="442" y="451" width="96" height="34">
+	</Capability>
+	<Capability id="b5a936d9-9f1a-49f6-add4-7ddc8b21860d" name="GPS" x="544" y="450" width="-1" height="-1">
+	</Capability>
+	<Capability id="7d03be79-68e8-4259-b218-0b0719201ccf" name="Movement" x="630" y="450" width="-1" height="-1">
+	</Capability>
+	<Capability id="4691af21-6a82-4603-b446-12ee813da727" name="Sonar" x="717" y="449" width="-1" height="-1">
+	</Capability>
+	<Capability id="08cd09f6-2235-47e5-8f2b-fd01a9ab3d5e" name="Curiosity" x="806" y="448" width="-1" height="-1">
+	</Capability>
+	<Role id="c4a303ad-44a4-4d4a-b83e-edb4e75e6c62" name="Mapper" x="109" y="65" width="-1" height="-1">
+	</Role>
+	<Role id="fd25a5cf-c816-465b-b5c2-ceafa2614f9c" name="Broker" x="369" y="65" width="-1" height="-1">
+	</Role>
+	<Role id="160e82c2-c77b-44d8-94d7-a9057a3f9117" name="Explorer" x="650" y="189" width="-1" height="-1">
+	</Role>
+</AgentDiagram>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PlanDiagram version="1.1" name="Plan Diagram" embedded="false">
+	<Goal name="Achieve Best Exploration"/>
+	<StartState id="c7a47769-bb24-4617-8d7f-f77b79bb8b07" name="StartState0" x="55" y="228" width="-1" height="-1">
+		<transition guard="">
+			<child>eccb282f-8bfd-4133-b742-726d727476d6</child>
+			<Message name="recv" agents="Explorer">
+				<Performative name="receiveInterestingLocations">
+					<parameter name="locations" type="Location"/>
+				</Performative>
+			</Message>
+		</transition>
+	</StartState>
+	<InternalState id="eccb282f-8bfd-4133-b742-726d727476d6" name="Aggregate interesting locations" x="281" y="106" width="-1" height="-1">
+		<Action name="aggregateLocations" result="interestingLocations">
+			<parameter name="location" type="Location"/>
+		</Action>
+		<Action name="msgLeft--" result="msgLeft">
+		</Action>
+		<transition guard="while msgLeft &gt; 0">
+			<child>eccb282f-8bfd-4133-b742-726d727476d6</child>
+			<bendpoint x="349" y="71"/>
+			<bendpoint x="253" y="72"/>
+			<Message name="recv" agents="Explorer">
+				<Performative name="receiveInterestingLocations">
+					<parameter name="locations" type="Location"/>
+				</Performative>
+			</Message>
+		</transition>
+		<transition guard="">
+			<child>8d078b0b-6ba5-47fa-9117-c60f599581bc</child>
+		</transition>
+	</InternalState>
+	<InternalState id="8d078b0b-6ba5-47fa-9117-c60f599581bc" name="Pick Best Locations" x="615" y="180" width="-1" height="-1">
+		<Action name="pickNextTarget" result="bestLocation">
+			<parameter name="interestingLocation" type="Location"/>
+			<parameter name="explorerID" type="INTEGER"/>
+		</Action>
+		<Action name="msgLeft--" result="msgLeft">
+		</Action>
+		<transition guard="while msgLeft &gt; 0">
+			<child>8d078b0b-6ba5-47fa-9117-c60f599581bc</child>
+			<bendpoint x="752" y="201"/>
+			<bendpoint x="756" y="135"/>
+			<bendpoint x="668" y="134"/>
+			<Message name="send" agents="Explorer">
+				<Performative name="sendNextTarget">
+					<parameter name="bestLocation" type="Type"/>
+					<parameter name="explorerID" type="Type"/>
+				</Performative>
+			</Message>
+		</transition>
+		<transition guard="">
+			<child>b997cbf2-4784-41ef-9e03-a6206721bc7f</child>
+		</transition>
+	</InternalState>
+	<EndState id="b997cbf2-4784-41ef-9e03-a6206721bc7f" name="EndState0" x="465" y="317" width="-1" height="-1">
+	</EndState>
+</PlanDiagram>

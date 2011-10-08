@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PlanDiagram version="1.1" name="Plan Diagram" embedded="false">
+	<Goal name="MapEnvironment"/>
+	<StartState id="2e99453e-be91-45eb-8782-851e0d1f70aa" name="StartState0" x="55" y="48" width="-1" height="-1">
+		<transition guard="">
+			<child>e115f180-38f4-4ad2-adc4-361fa5a9f933</child>
+			<Message name="recv" agents="Explorer">
+				<Performative name="receiveLocalMap">
+					<parameter name="localMap" type="Map"/>
+				</Performative>
+			</Message>
+		</transition>
+	</StartState>
+	<InternalState id="e115f180-38f4-4ad2-adc4-361fa5a9f933" name="Aggregate Maps" x="243" y="100" width="-1" height="-1">
+		<Action name="aggregateMap" result="globalMap">
+			<parameter name="localMap" type="Map"/>
+		</Action>
+		<transition guard="">
+			<child>14febd4d-f719-405c-8e07-f1f59fe6364b</child>
+			<Message name="send" agents="Explorer">
+				<Performative name="sendGlobalMap">
+					<parameter name="globalMap" type="Map"/>
+				</Performative>
+			</Message>
+		</transition>
+	</InternalState>
+	<EndState id="14febd4d-f719-405c-8e07-f1f59fe6364b" name="EndState0" x="574" y="235" width="-1" height="-1">
+	</EndState>
+</PlanDiagram>
