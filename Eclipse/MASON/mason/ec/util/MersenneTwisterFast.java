@@ -406,7 +406,7 @@ public strictfp class MersenneTwisterFast implements Serializable, Cloneable
             mti = 0;
             }
   
-        y = mt[mti++];
+        y = mt[mti++];z
         y ^= y >>> 11;                          // TEMPERING_SHIFT_U(y)
         y ^= (y << 7) & TEMPERING_MASK_B;       // TEMPERING_SHIFT_S(y)
         y ^= (y << 15) & TEMPERING_MASK_C;      // TEMPERING_SHIFT_T(y)

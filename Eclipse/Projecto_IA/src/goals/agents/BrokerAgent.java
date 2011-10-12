@@ -58,7 +58,8 @@ public class BrokerAgent {
 		
 		return target;
 	}
-	
+		
+ 	
 	public void addPointOfInterest(Int2D point, double interestMeasure) {
 		PointOfInterest PoI = new PointOfInterest(point, interestMeasure);
 		

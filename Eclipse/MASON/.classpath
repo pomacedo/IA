@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="libraries/jmf.jar"/>
 	<classpathentry kind="lib" path="libraries/MacOSXOnly/quaqua-colorchooser-only.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_23"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="mason"/>
 </classpath>
