@@ -34,6 +34,11 @@ public class SimEnvironment implements Steppable{
 	
 	FileWriter writer;
 	
+	public int getStep()
+	{
+		return step;
+	}
+	
 	public SimEnvironment(SimState state, int width, int height, int nAgents){
 		
 		this.world = new SparseGrid2D(width, height);
@@ -44,6 +49,7 @@ public class SimEnvironment implements Steppable{
 		this.broker = new BrokerAgent();
 		                          
 		this.setup(state);
+		this.broker.setMyExplorerAgents(this.explorers);
 		
 		try {
 			writer = new FileWriter("stats.csv");
@@ -209,7 +215,7 @@ public class SimEnvironment implements Steppable{
 			do { loc = new Int2D(state.random.nextInt(width_separation - sep/2), state.random.nextInt(height_separation - sep/2) + (2*height_separation + sep/2)); }
 			while ( occupied[loc.x][loc.y] != null);
 			
-			addObject(Tree.class, loc);
+			addObject(Water.class, loc);
 		}
 		
 		// Down Center Block - Water
@@ -217,7 +223,7 @@ public class SimEnvironment implements Steppable{
 			do { loc = new Int2D(state.random.nextInt(width_separation) + (width_separation), state.random.nextInt(height_separation - sep/2) + (2*height_separation + sep/2)); }
 			while ( occupied[loc.x][loc.y] != null);
 			
-			addObject(Water.class, loc);
+			addObject(Tree.class, loc);
 		}
 		
 		// Down Right Block - Forest
@@ -225,7 +231,7 @@ public class SimEnvironment implements Steppable{
 			do { loc = new Int2D(state.random.nextInt(width_separation - sep/2) + (2*width_separation + sep/2), state.random.nextInt(height_separation - sep/2) + (2*height_separation + sep/2)); }
 			while ( occupied[loc.x][loc.y] != null);
 			
-			addObject(Tree.class, loc);
+			addObject(Water.class, loc);
 		}
 	}
 	
@@ -278,6 +284,7 @@ public class SimEnvironment implements Steppable{
 		int objsSeen = 0;
 		int nObjs = 0;
 		int nErrors = 0;
+		int nWater=mapper.nWater;
 		
 		for(int i = 0; i<world.getWidth(); i++){
 			for (int j = 0; j < world.getHeight(); j++) {
@@ -298,6 +305,8 @@ public class SimEnvironment implements Steppable{
 		System.err.println("-------------------------");
 		System.err.println("% OF OBJECTS SEEN: " + (int) Math.ceil(((double)objsSeen/(double)nObjs)*100) + "%");
 		System.err.println("% OF ERROR: " + ((double)nErrors/(double)objsSeen)*100.0 + "%");
+		System.err.println("% WATER FOUND  "+nWater +" / 1500"+"%");
+		
 		System.err.println("-------------------------");
 		
 		try {

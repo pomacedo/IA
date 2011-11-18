@@ -1,17 +1,18 @@
 package goals.agents;
 
+import goals.objects.Prototype;
+import goals.objects.SimObject;
+import goals.objects.Wall;
+import goals.objects.Water;
+import goals.utils.Utils;
+
 import java.util.Hashtable;
 import java.util.Vector;
 
-import goals.env.SimEnvironment;
-import goals.objects.Prototype;
-import goals.objects.SimObject;
-import goals.utils.Utils;
 import sim.engine.SimState;
 import sim.util.Bag;
 import sim.util.Double2D;
 import sim.util.Int2D;
-import goals.*;
 
 public class ExplorerAgent implements sim.portrayal.Oriented2D {
 	private static final long serialVersionUID = 1L;
@@ -32,7 +33,9 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 
 	private boolean GLOBAL_KNOWLEDGE = true;
 	private int IDENTIFY_TIME = 15;
-
+	
+	private SimObject myInterest = new Water();
+	
 	public ExplorerAgent(Int2D loc) {
 		this.loc = loc;
 		this.orientation = 0;
@@ -56,6 +59,7 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 					Hashtable<Class, Double> probs = getProbabilityDist(obj);
 
 					float interest = getObjectInterest(probs);
+					//float interest = getObjectPersonalInterest(probs,this.getMyInterest());
 					//System.out.println("OBJECT AT: (" + obj.loc.x + ","
 					//		+ obj.loc.y + "). INTEREST: " + interest);
 
@@ -65,15 +69,25 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 
 						mapper.identify(obj, highest);
 						Class real = env.identifyObject(obj.loc).getClass();
+						if(real == getMyInterest().getClass())
+						{
+							//broker.removePointOfInterest(obj.loc);
+							mapper.addWater();
+							broker.addRelativePOI(obj.loc,100.0);
+						}
+						else
+						{							
+							broker.decayPoints(obj.loc);
+						}
 						//if (highest != real)
 						//	System.err.println(real.getSimpleName());
 						
 						broker.removePointOfInterest(obj.loc);
 
 					} else {
+						
 						mapper.addObject(obj);
 						broker.addPointOfInterest(obj.loc, interest);
-
 					}
 				}
 
@@ -87,8 +101,20 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 
 					SimObject obj = env.identifyObject(loc);
 
-					if (obj != null) {
-						broker.removePointOfInterest(obj.loc);
+					if (obj != null) {	
+						
+						if(obj.getClass() == getMyInterest().getClass())
+						{
+							mapper.addWater();
+							broker.addRelativePOI(obj.loc,100.0);
+							//broker.removePointOfInterest(obj.loc);							
+						}
+						else
+						{
+							broker.decayPoints(obj.loc);
+						}
+						
+						broker.removePointOfInterest(obj.loc);						
 						mapper.identify(obj, obj.getClass());
 						addPrototype(obj, obj.getClass());
 
@@ -100,7 +126,9 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 			// If the explorer has no target, he has to request a new one from
 			// the broker
 			if (target == null) {
+				
 				target = broker.requestTarget(loc);
+				
 				//System.out.println("NEW TARGET: X: " + target.x + " Y: "
 				//		+ target.y);
 			}
@@ -128,9 +156,10 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 		Vector<Double> prob = new Vector<Double>();
 
 		for (Class c : probs.keySet()) {
+						
 			if (c == SimObject.class)
 				unknownInterest = Utils.interestFunction(probs.get(c));
-
+			
 			prob.add(probs.get(c));
 		}
 
@@ -144,6 +173,7 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 		return (int) Math.round(interest);
 	}
 
+	
 	private void addPrototype(SimObject obj, Class class1) {
 		// TODO Auto-generated method stub
 
@@ -184,15 +214,21 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 
 		for (Prototype prot : prototypes) {
 			// TODO: Stuff here
+			
+			if(obj.getClass() == getMyInterest().getClass())
+			{
+				probs.put(prot.thisClass,1.0);
+				continue;
+			}
+			
 			double corr;
-			double colorDist = Utils.colorDistance(obj.color, prot.color);
+			double colorDist = Utils.colorDistance(obj.color, prot.color);			
 			double sizeDist = Math.abs(obj.size - prot.size) / Utils.MAX_SIZE;
-
 			// Correlation
 			corr = 1 - (0.5 * colorDist + 0.5 * sizeDist);
 			// Saturation
 			corr = Utils.saturate(corr, prot.nOccurrs);
-
+			
 			probs.put(prot.thisClass, corr*corr*corr);
 			corrSum += corr*corr*corr;
 
@@ -226,4 +262,8 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 		return orientation;
 	}
 
+	public SimObject getMyInterest() {
+		return this.myInterest;
+	}
+	
 }

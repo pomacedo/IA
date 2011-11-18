@@ -15,6 +15,7 @@ public class MapperAgent {
 	public SparseGrid2D knownWorld;
 	public Class[][] identifiedObjects;
 	public Vector<Prototype> knownObjects;
+	public int nWater=0;
 	
 	public MapperAgent(int width, int height){
 		knownWorld = new SparseGrid2D(width, height);
@@ -110,6 +111,12 @@ public class MapperAgent {
 		
 		this.knownObjects.add(new Prototype(class1, obj.size, obj.color));
 		
+	}
+	
+	
+	public synchronized void  addWater()
+	{
+		this.nWater++;
 	}
 
 }

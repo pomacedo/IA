@@ -124,6 +124,24 @@ public final class MutableDouble2D implements java.io.Serializable
         return (int)(key ^ (key >> 32));
         }
         
+    
+    public final MutableDouble2D resize(double val)
+    {
+    if (val < 0) 
+        throw new IllegalArgumentException("The argument to MutableDouble2D.setLength(...) must be zero or positive");
+    if (val == 0) x = y = 0;
+    else
+        {
+        final double len = Math.sqrt(x * x + y * y);
+        if (len != len || len == infinity || len == -infinity || len == 0)
+            throw new ArithmeticException("" + this + " length is "+ len + " cannot change its length");
+        final double invertedlen = val / len;
+        x = x * invertedlen;
+        y = y * invertedlen;
+        }
+    return this;
+    } 
+    
     // can't have separate equals(...) methods as the
     // argument isn't virtual
     public final boolean equals(final Object obj)
