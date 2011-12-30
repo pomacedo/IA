@@ -22,7 +22,7 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 	private final double STEP = Math.sqrt(2);
 	private final int viewRange = 40;
 	
-	private final int OBJ_RELATION_RADIOUS = 30;
+	private final int OBJ_RELATION_RADIOUS = 40;
 	private int identifyClock;
 
 	private Int2D loc;
@@ -65,8 +65,8 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 
 					float interest = getObjectInterest(probs);
 					//float interest = getObjectPersonalInterest(probs,this.getMyInterest());
-					//System.out.println("OBJECT AT: (" + obj.loc.x + ","
-					//		+ obj.loc.y + "). INTEREST: " + interest);
+//					System.out.println("OBJECT AT: (" + obj.loc.x + ","
+//							+ obj.loc.y + "). INTEREST: " + interest);
 
 					// If not interesting enough, classify it to the highest prob
 					
@@ -77,12 +77,11 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 						Class real = env.identifyObject(obj.loc).getClass();
 						
 						//##### Versao prototipo
-//						if(real == getMyInterest().getClass())
-//						{
-////							//broker.removePointOfInterest(obj.loc);
-//							mapper.addWater();
-////							broker.addRelativePOI(obj.loc,100.0);
-//						}
+						if(real == getMyInterest().getClass())
+						{
+							Bag neighboors = env.getVisibleObejcts(obj.loc.x, obj.loc.y, OBJ_RELATION_RADIOUS);
+							broker.addRelativePOI(neighboors,100.0);
+						}
 //						else
 //						{							
 //							broker.decayPoints(obj.loc);
@@ -176,8 +175,8 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 
 		entropyInterest = Utils.entropy(prob);
 
-		//System.out.println("ENTROPY: " + entropyInterest + " | UNKNOWN: "
-		//		+ unknownInterest);
+//		System.out.println("ENTROPY: " + entropyInterest + " | UNKNOWN: "
+//				+ unknownInterest);
 
 		double interest = (entropyInterest > unknownInterest ? entropyInterest : unknownInterest) * 100;
 
@@ -190,7 +189,6 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 
 		// Using the global team knowledge
 		if (GLOBAL_KNOWLEDGE) {
-
 			mapper.addPrototype(obj, class1);
 
 			// Using only the agent's knowledge
@@ -234,12 +232,13 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 			for(int i=0;i<neighboors.size();i++)
 			{
 				SimObject o = (SimObject) neighboors.get(i);
-				if(mapper.isIdentified(o.getLoc()) ){
+				if(mapper.isIdentified(o.getLoc())){
 					if(o.getClass() == interestObj.getClass())
-						numOcurr--;
-				}
-				
+						numOcurr--;					
+				}				
 			}
+			if(numOcurr<0)
+				numOcurr=0;
 //			if(obj.getClass() == getMyInterest().getClass())
 //			{
 //				
@@ -271,7 +270,7 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 		for (Class c : probs.keySet()) {
 			
 			probs.put(c, probs.get(c) / corrSum);
-			//System.out.println(c.getSimpleName() + " : " + probs.get(c));
+//			System.out.println(c.getSimpleName() + " : " + probs.get(c));
 		}
 
 		return probs;

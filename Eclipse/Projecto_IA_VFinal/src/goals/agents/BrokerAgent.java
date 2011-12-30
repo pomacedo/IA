@@ -211,9 +211,7 @@ public class BrokerAgent {
 //				}			
 //			}
 //		}
-	
-	
-	
+
 //	public void decayPoints(Int2D loc)
 //	{
 //		for(int x=-10; x<9;x+=2)

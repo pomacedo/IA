@@ -38,12 +38,6 @@ public class Utils {
 //		double corr2=corr;
 		double sat = (Math.tanh( (nOcurrs-5)/2.0 ) + 1.0 ) / 2.0;
 		corr = corr*sat;
-		
-		//System.out.println("-------CURRENT CORR="+corr);
-		nOcurrs/=2;
-//		sat = (Math.tanh( (nOcurrs-5)/2.0 ) + 1.0 ) / 2.0;
-//		corr2 = corr2*sat;
-		//System.out.println("-------CURRENT CORR2="+corr2);
 		return corr;
 	}
 	

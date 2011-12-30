@@ -70,6 +70,8 @@ public class SimEnvironment implements Steppable{
 		//buildRandomMap(state);
 		buildDonutMap(state);
 		//buildStructuredMap(state);
+		//buildStructuredMapRiver(state);
+		//buildStructuredMapRiver2Lakes(state);
 	}
 	
 	/* Explorer Adding Methods */
@@ -119,7 +121,7 @@ public class SimEnvironment implements Steppable{
 	
 	private void buildRandomMap(SimState state) {
 		Class classes[] = {Wall.class, Tree.class, Bush.class, Water.class, House.class};
-		int numberOfInstances[] = {400, 200, 200, 100, 20};
+		int numberOfInstances[] = {500, 500, 500, 500, 500};
 		Int2D loc;
 		
 		for (int i = 0; i < classes.length; i++) {
@@ -139,15 +141,15 @@ public class SimEnvironment implements Steppable{
 		
 		// Define the two classes
 		Class outer_class = Water.class;
-		Class inner_class = House.class;
+		Class inner_class = Tree.class;
 		
 		// Number of instances
 		int num_outer = 500;
 		int num_inner = 500;
 		
 		// Define the size of the inner square
-		int inner_width = world.getWidth() /3;
-		int inner_height = world.getHeight() /3;
+		int inner_width = world.getWidth() /2;
+		int inner_height = world.getHeight() /2;
 		
 		int inner_x = (world.getWidth() / 2) - (inner_width / 2);
 		int inner_y = (world.getHeight() / 2) - (inner_height / 2);
@@ -218,7 +220,7 @@ public class SimEnvironment implements Steppable{
 			do { loc = new Int2D(state.random.nextInt(width_separation - sep/2), state.random.nextInt(height_separation - sep/2) + (2*height_separation + sep/2)); }
 			while ( occupied[loc.x][loc.y] != null);
 			
-			addObject(Water.class, loc);
+			addObject(Tree.class, loc);
 		}
 		
 		// Down Center Block - Water
@@ -226,10 +228,78 @@ public class SimEnvironment implements Steppable{
 			do { loc = new Int2D(state.random.nextInt(width_separation) + (width_separation), state.random.nextInt(height_separation - sep/2) + (2*height_separation + sep/2)); }
 			while ( occupied[loc.x][loc.y] != null);
 			
-			addObject(Tree.class, loc);
+			addObject(Water.class, loc);
 		}
 		
 		// Down Right Block - Forest
+		for(int j = 0; j < num_instances; j++) {
+			do { loc = new Int2D(state.random.nextInt(width_separation - sep/2) + (2*width_separation + sep/2), state.random.nextInt(height_separation - sep/2) + (2*height_separation + sep/2)); }
+			while ( occupied[loc.x][loc.y] != null);
+			
+			addObject(Tree.class, loc);
+		}
+	}
+	
+	
+	private void buildStructuredMapRiver2Lakes(SimState state) {
+		Int2D loc;
+		
+		// Number of instances per block
+		int num_instances = 500;
+		
+		int height_separation = world.getHeight()/3;
+		int width_separation = world.getWidth()/3;
+		int sep = 50;
+		
+		// First Block - Top Forest
+		for(int j = 0; j < num_instances; j++) {
+			do { loc = new Int2D(state.random.nextInt(world.getWidth()), state.random.nextInt(height_separation - sep/2)); }
+			while ( occupied[loc.x][loc.y] != null);
+			
+			addObject(Tree.class, loc);
+		}
+		
+		// Bush Block - Bushes below the Forest
+		for(int j = 0; j < num_instances; j++) {
+			do { loc = new Int2D(state.random.nextInt(world.getWidth()), state.random.nextInt(30) + (height_separation - 30/2)); }
+			while ( occupied[loc.x][loc.y] != null);
+			
+			addObject(Bush.class, loc);
+		}
+		
+		// Central Block - River
+		for(int j = 0; j < num_instances*2; j++) {
+			do { loc = new Int2D(state.random.nextInt(world.getWidth()), state.random.nextInt(height_separation - sep) + (height_separation + sep/2)); }
+			while ( occupied[loc.x][loc.y] != null);
+			
+			addObject(Water.class, loc);
+		}
+		
+		// Wall Block - House neighborhood
+		for(int j = 0; j < num_instances; j++) {
+			do { loc = new Int2D(state.random.nextInt(world.getWidth()), state.random.nextInt(30) + (2*height_separation - 30/2)); }
+			while ( occupied[loc.x][loc.y] != null);
+			
+			addObject(House.class, loc);
+		}
+		
+		// Down Left Block - Bushes
+		for(int j = 0; j < num_instances; j++) {
+			do { loc = new Int2D(state.random.nextInt(width_separation - sep/2), state.random.nextInt(height_separation - sep/2) + (2*height_separation + sep/2)); }
+			while ( occupied[loc.x][loc.y] != null);
+			
+			addObject(Water.class, loc);
+		}
+		
+		// Down Center Block - Forest
+		for(int j = 0; j < num_instances; j++) {
+			do { loc = new Int2D(state.random.nextInt(width_separation) + (width_separation), state.random.nextInt(height_separation - sep/2) + (2*height_separation + sep/2)); }
+			while ( occupied[loc.x][loc.y] != null);
+			
+			addObject(Tree.class, loc);
+		}
+		
+		// Down Right Block - Wall ruins
 		for(int j = 0; j < num_instances; j++) {
 			do { loc = new Int2D(state.random.nextInt(width_separation - sep/2) + (2*width_separation + sep/2), state.random.nextInt(height_separation - sep/2) + (2*height_separation + sep/2)); }
 			while ( occupied[loc.x][loc.y] != null);
@@ -238,6 +308,73 @@ public class SimEnvironment implements Steppable{
 		}
 	}
 	
+	
+	private void buildStructuredMapRiver(SimState state) {
+		Int2D loc;
+		
+		// Number of instances per block
+		int num_instances = 500;
+		
+		int height_separation = world.getHeight()/3;
+		int width_separation = world.getWidth()/3;
+		int sep = 50;
+		
+		// First Block - Top Forest
+		for(int j = 0; j < num_instances; j++) {
+			do { loc = new Int2D(state.random.nextInt(world.getWidth()), state.random.nextInt(height_separation - sep/2)); }
+			while ( occupied[loc.x][loc.y] != null);
+			
+			addObject(Tree.class, loc);
+		}
+		
+		// Bush Block - Bushes below the Forest
+		for(int j = 0; j < num_instances; j++) {
+			do { loc = new Int2D(state.random.nextInt(world.getWidth()), state.random.nextInt(30) + (height_separation - 30/2)); }
+			while ( occupied[loc.x][loc.y] != null);
+			
+			addObject(Bush.class, loc);
+		}
+		
+		// Central Block - River
+		for(int j = 0; j < num_instances*2; j++) {
+			do { loc = new Int2D(state.random.nextInt(world.getWidth()), state.random.nextInt(height_separation - sep) + (height_separation + sep/2)); }
+			while ( occupied[loc.x][loc.y] != null);
+			
+			addObject(Water.class, loc);
+		}
+		
+		// Wall Block - House neighborhood
+		for(int j = 0; j < num_instances; j++) {
+			do { loc = new Int2D(state.random.nextInt(world.getWidth()), state.random.nextInt(30) + (2*height_separation - 30/2)); }
+			while ( occupied[loc.x][loc.y] != null);
+			
+			addObject(House.class, loc);
+		}
+		
+		// Down Left Block - Bushes
+		for(int j = 0; j < num_instances; j++) {
+			do { loc = new Int2D(state.random.nextInt(width_separation - sep/2), state.random.nextInt(height_separation - sep/2) + (2*height_separation + sep/2)); }
+			while ( occupied[loc.x][loc.y] != null);
+			
+			addObject(Bush.class, loc);
+		}
+		
+		// Down Center Block - Forest
+		for(int j = 0; j < num_instances; j++) {
+			do { loc = new Int2D(state.random.nextInt(width_separation) + (width_separation), state.random.nextInt(height_separation - sep/2) + (2*height_separation + sep/2)); }
+			while ( occupied[loc.x][loc.y] != null);
+			
+			addObject(Tree.class, loc);
+		}
+		
+		// Down Right Block - Wall ruins
+		for(int j = 0; j < num_instances; j++) {
+			do { loc = new Int2D(state.random.nextInt(width_separation - sep/2) + (2*width_separation + sep/2), state.random.nextInt(height_separation - sep/2) + (2*height_separation + sep/2)); }
+			while ( occupied[loc.x][loc.y] != null);
+			
+			addObject(Wall.class, loc);
+		}
+	}
 	private void addObject(Class c, Int2D loc) {
 		Class[] params = {int.class,int.class};
 		Object[] args = {loc.x,loc.y};
@@ -355,7 +492,7 @@ public class SimEnvironment implements Steppable{
 		while((here.get(i) instanceof ExplorerAgent) && i<here.numObjs) i++;
 		
 		SimObject real = (SimObject) here.get(i);
-		if(mapper.nWater>=500 && GoalStep==0)
+		if(mapper.nWater>500*0.98 && GoalStep==0) // 2% error free - 490 for 500 water and 980 for 1000 water
 			GoalStep=this.step;
 		return real;
 	}

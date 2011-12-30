@@ -124,9 +124,6 @@ public class MapperAgent {
 	public synchronized void  addWater()
 	{
 		this.nWater++;
-		Date d = new Date();
-		if(nWater==1000)
-			//System.exit(0);
-			System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"+d.getTime());
+		
 	}
 }
