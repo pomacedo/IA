@@ -22,7 +22,7 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 	private final double STEP = Math.sqrt(2);
 	private final int viewRange = 40;
 	
-	private final int OBJ_RELATION_RADIOUS = 40;
+	private final int OBJ_RELATION_RADIOUS = 50;
 	private int identifyClock;
 
 	private Int2D loc;
@@ -82,13 +82,7 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 							Bag neighboors = env.getVisibleObejcts(obj.loc.x, obj.loc.y, OBJ_RELATION_RADIOUS);
 							broker.addRelativePOI(neighboors,100.0);
 						}
-//						else
-//						{							
-//							broker.decayPoints(obj.loc);
-//						}
-						//if (highest != real)
-						//	System.err.println(real.getSimpleName());
-						//##### Versao prototipo
+
 						
 						broker.removePointOfInterest(obj.loc);
 
@@ -110,19 +104,14 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 					SimObject obj = env.identifyObject(loc);
 
 					if (obj != null) {	
-						//##### Versao prototipo
+					
 						if(obj.getClass() == getMyInterest().getClass())
 						{
 							Bag neighboors = env.getVisibleObejcts(obj.loc.x, obj.loc.y, viewRange);
 							broker.addRelativePOI(neighboors,100.0);
 							//broker.removePointOfInterest(obj.loc);							
 						}
-//						else
-//						{
-//							Bag neighboors = env.getVisibleObejcts(obj.loc.x, obj.loc.y, 5);
-//							broker.decayPoints(neighboors);
-//						}
-						//##### Versao prototipo
+
 						
 						broker.removePointOfInterest(obj.loc);						
 						mapper.identify(obj, obj.getClass(),myInterest);
@@ -239,12 +228,7 @@ public class ExplorerAgent implements sim.portrayal.Oriented2D {
 			}
 			if(numOcurr<0)
 				numOcurr=0;
-//			if(obj.getClass() == getMyInterest().getClass())
-//			{
-//				
-//				probs.put(prot.thisClass,1.0);
-//				continue;
-//			}
+
 			
 			double corr;
 			double colorDist = Utils.colorDistance(obj.color, prot.color);			

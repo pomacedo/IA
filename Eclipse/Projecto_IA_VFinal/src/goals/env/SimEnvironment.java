@@ -406,11 +406,18 @@ public class SimEnvironment implements Steppable{
 			state.finish();
 		}
 		
+		
+		
 		int stepCheckpoint = maxSteps/100;
 		if( step%stepCheckpoint == 0 ){
 			printStats();
 		}
+		try {
+			SaveData();
+		} catch (IOException e) {
 		
+			e.printStackTrace();
+		}
 		/*
 		 * Step over all the explorers in the environment, making them step
 		 */
@@ -426,6 +433,9 @@ public class SimEnvironment implements Steppable{
 		int nErrors = 0;
 		int nWater=mapper.nWater;
 		
+		
+		
+		  
 		for(int i = 0; i<world.getWidth(); i++){
 			for (int j = 0; j < world.getHeight(); j++) {
 				Class real = occupied[i][j];
@@ -457,6 +467,15 @@ public class SimEnvironment implements Steppable{
 		}
 	}
 
+	public void SaveData() throws IOException
+	{
+		//System.out.println("ESTOU AKI");
+		FileWriter fstream = new FileWriter("MapXRand3Agent.csv",true);
+		BufferedWriter out = new BufferedWriter(fstream);
+			
+		out.append(mapper.nWater+"\n");
+		out.close();
+	}
 	public MapperAgent getMapper() {
 		return mapper;
 	}
